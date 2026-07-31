@@ -56,12 +56,16 @@
             width: 100%;
             max-width: 1000px;
             margin: 0 auto;
-            background-color: var(--banner-bg);
+            
+            /* SWAP THIS LINE: Dark charcoal tint that lets 15% of the tree background show through */
+            background-color: rgba(18, 18, 18, 0.85); 
+            
             box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
             display: flex;
             flex-direction: column;
             position: relative;
             z-index: 2; 
+            /*backdrop-filter: blur(8px); Blurs the background trees right through the container */
         }
 
         /* Top Banner Image - Full Column Width */
@@ -72,14 +76,14 @@
             background-image: url('IMG_2028.jpg');
             background-size: cover;
             background-position: center;
-            border-bottom: 2px solid var(--accent-color); 
+            /*border-bottom: 2px solid var(--accent-color);*/ 
         }
 
         /* Main Band Name Section */
         header {
             text-align: center;
             padding: 40px 0;
-            background-color: var(--banner-bg);
+            background-color: transparent; /* Changed from var(--banner-bg) */
         }
 
         h1 {
@@ -298,6 +302,20 @@
                 <p>We are currently booking breweries, wineries, festivals, and private events across Washington state and the Pacific Northwest.</p>
                 <a href="mailto:booking@morgansmithmusic.com" class="booking-btn">Email For Bookings</a>
                 
-                <!-- Live Social Media Interactive Icon Vectors -->
+                <!-- Live Social Media Navigation Tray using fallback web vectors -->
                 <p class="social-heading">Follow us on social media!</p>
                 <div class="social-tray">
+                    <a href="https://facebook.com" target="_blank" class="social-link" aria-label="Facebook">
+                        <img src="https://wikimedia.org" alt="Facebook Icon" style="width: 40px; height: 40px; vertical-align: middle;">
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="social-link" aria-label="Instagram">
+                        <img src="https://wikimedia.org" alt="Instagram Icon" style="width: 40px; height: 40px; vertical-align: middle;">
+                    </a>
+                </div>
+            </div>
+        </section> <!-- This closing tag now matches perfectly! -->
+
+        <!-- Bottom Ending Banner (IMG_2030) -->
+        <div class="bottom-banner"></div>
+
+    </div>
