@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morgan Smith & Co. | Official Website</title>
+    
+    <!-- Cloud Delivery Link for Official Facebook & Instagram Icons -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    
+    <style>
+        :root {
+            --bg-color: #000000; /* Solid deep black background */
+            --banner-bg: #121212; /* Slightly gray-black for contrast */
+            --accent-color: #ff4757; /* Original Red Scheme */
+            --text-color: #ffffff;
+            --muted-text: #a4b0be;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Clean, high-legibility system block styling */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Creates a separated background layer ONLY for the tree picture */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Keeps it behind everything else */
+            background-image: url('IMG_1661.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            /* TURNS ONLY THE BACKGROUND PHOTO BLACK & WHITE AT 75% */
+            filter: grayscale(75%); 
+        }
+
+        /* Central Content Container */
+        .main-banner {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: var(--banner-bg);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 2; 
+        }
+
+        /* Top Banner Image - Full Column Width */
+        .top-banner {
+            width: 100%; 
+            height: 500px;
+            margin: 0; 
+            background-image: url('IMG_2028.jpg');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 2px solid var(--accent-color); 
+        }
+
+        /* Main Band Name Section */
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background-color: var(--banner-bg);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .tagline {
+            color: var(--accent-color);
+            font-size: 1.4rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+        }
+
+        /* Thumbnail Image (IMG_1446) Setup */
+        .band-thumbnail {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid var(--text-color);
+            object-fit: cover;
+            object-position: center;
+            margin: 0 auto;
+            display: block;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Information & Text Blocks */
+        section {
+            padding: 45px 0;
+            border-top: 1px solid #2f3542;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 10px;
+        }
+
+        /* Responsive Video Box */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Gig Calendar Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        tr { border-bottom: 1px solid #2f3542; }
+        td { padding: 15px 10px; font-size: 1.1rem; }
+        .date { font-weight: bold; color: var(--accent-color); width: 25%; }
+        .venue { font-weight: 500; }
+        .location { color: var(--muted-text); text-align: right; }
+
+        /* Booking CTA Box */
+        .booking-box {
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #2f3542;
+        }
+
+        .booking-btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            margin-top: 20px;
+            margin-bottom: 25px;
+        }
+
+        /* Heading text for the social section */
+        .social-heading {
+            font-size: 1.1rem;
+            color: var(--muted-text);
+            margin-top: 15px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Centers the logo icons side-by-side */
+        .social-tray {
+            display: flex;
+            justify-content: center;
+            gap: 30px; /* Space between links */
+            margin-top: 5px;
+        }
+
+        /* Styles the interactive vector logos */
+        .social-link {
+            color: var(--text-color);
+            font-size: 2.5rem; /* Touch friendly mobile scaling */
+            text-decoration: none;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        /* Hover response animations */
+        .social-link:hover {
+            color: var(--accent-color); /* Turns signature red */
+            transform: scale(1.15); /* Snaps slightly outward */
+        }
+
+        /* Bottom Banner Image (IMG_2030) Setup */
+        .bottom-banner {
+            width: 100%;
+            height: 250px;
+            background-image: url('IMG_2030.jpg');
+            background-size: cover;
+            background-position: center;
+            border-top: 2px solid var(--accent-color);
+            margin-top: 20px;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .top-banner { height: 200px; }
+            h1 { font-size: 2.2rem; }
+            td { padding: 10px 5px; font-size: 0.9rem; }
+            .bottom-banner { height: 150px; }
+            .social-tray { flex-direction: row; gap: 20px; } /* Horizontal alignment on phone display */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Central Strip Area -->
+    <div class="main-banner">
+        
+        <!-- Top Image Banner (IMG_2028) -->
+        <div class="top-banner"></div>
+
+        <!-- Band Title & Info Header -->
+        <header>
+            <div class="container">
+                <h1>Morgan Smith & Co.</h1>
+                <p class="tagline">Evergreen Bluegrass</p>
+                
+                <!-- Center Embedded Photo Thumbnail (IMG_1446) -->
+                <img src="IMG_1446.jpg" alt="Morgan Smith & Co. Band Portrait" class="band-thumbnail">
+            </div>
+        </header>
+
+        <!-- Media/Video Section -->
+        <section class="container">
+            <h2>Latest Videos</h2>
+            <div class="video-container">
+                <iframe src="https://youtube.com" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- Tour Schedule Section -->
+        <section class="container">
+            <h2>Upcoming Shows</h2>
+            <table>
+                <tr>
+                    <td class="date">Aug 8 [12-2]</td>
+                    <td class="venue">Private Party</td>
+                    <td class="location">Indianola, WA</td>
+                </tr>
+                <tr>
+                    <td class="date">Aug 8 [4-6]</td>
+                    <td class="venue">Silverdale Old Town Market</td>
+                    <td class="location">Silverdale, WA</td>
+                </tr>
+                <tr>
+                    <td class="date">Aug 15</td>
+                    <td class="venue">Webbstock</td>
+                    <td class="location">Kingston, WA</td>
+                </tr>
+                <tr>
+                    <td class="date">Sep 11</td>
+                    <td class="venue">Outdoors On The Ave</td>
+                    <td class="location">Seattle, WA</td>
+                </tr>
+                <tr>
+                    <td class="date">Oct 2</td>
+                    <td class="venue">Bushel and Barrel Ciderhouse</td>
+                    <td class="location">Poulsbo, WA</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Contact/Booking Box -->
+        <section class="container">
+            <h2>Booking & Contact</h2>
+            <div class="booking-box">
+                <p>We are currently booking breweries, wineries, festivals, and private events across Washington state and the Pacific Northwest.</p>
+                <a href="mailto:morgangsmith360@gmail.com" class="booking-btn">Email For Bookings</a>
+                
+                <!-- Live Social Media Interactive Icon Vectors -->
+                <p class="social-heading">Follow us on social media!</p>
+                <div class="social-tray">
