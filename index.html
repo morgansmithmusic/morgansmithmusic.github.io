@@ -12,7 +12,7 @@
     <meta property="og:description" content="Official website for Morgan Smith & Co. Booking high-energy Evergreen Bluegrass, Americana, hootenannies, and honky tonks across the Pacific Northwest.">
     
     <!-- The exact high-res image that will display inside the share card layout -->
-    <meta property="og:image" content="https://wwww.morgansmithmusic.com/IMG_2028_1.jpg">
+    <meta property="og:image" content="https://www.morgansmithmusic.com/IMG_2028_1.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <!-- Cloud Delivery Link for Official Facebook & Instagram Icons -->
@@ -331,15 +331,16 @@
             transform: scale(1.15); /* Snaps slightly outward */
         }
 
-        /* Bottom Banner Image (IMG_2030) Setup */
+        /* Bottom Banner Image - Upgraded to Full-Width Screen Span */
         .bottom-banner {
-            width: 100%;
+            width: 100% !important; /* Forces it to break past boundaries and fill the viewport */
+            max-width: 1000px; /* Optional: Keep this if you want it to perfectly square up with the desktop top banner, remove this line if you want it to touch the absolute left and right edges of a massive desktop screen */
+            margin: 0 auto; /* Keeps it perfectly centered on wide desktop setups */
             height: 250px;
-            background-image: url('IMG_2030_1.jpg');
+            background-image: url('IMG_2030.jpg');
             background-size: cover;
             background-position: center;
             border-top: 2px solid var(--accent-color);
-            margin-top: 20px;
         }
 
         /* Mobile Adjustments */
@@ -462,9 +463,12 @@
                     </a>
                 </div>
             </div>
-        </section> <!-- This closing tag now matches perfectly! -->
+        </section> <!-- This closes your Booking Section -->
 
-        <!-- Bottom Ending Banner (IMG_2030) -->
-        <div class="bottom-banner"></div>
+    </div> <!-- This closes your central .main-banner content column -->
 
-    </div>
+    <!-- MOVE THE BOTTOM BANNER TO SIT DOWN HERE -->
+    <div class="bottom-banner"></div>
+
+</body>
+</html>
