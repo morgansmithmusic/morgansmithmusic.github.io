@@ -11,15 +11,12 @@
     <meta property="og:title" content="Morgan Smith & Co. | Official Website">
     <meta property="og:description" content="Official website for Morgan Smith & Co. Booking high-energy Evergreen Bluegrass, Americana, hootenannies, and honky tonks across the Pacific Northwest.">
     
-    <!-- The exact high-res image that will display inside the share card layout -->
     <meta property="og:image" content="https://www.morgansmithmusic.com/IMG_2028_1.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <!-- Cloud Delivery Link for Official Facebook & Instagram Icons -->
     <link rel="stylesheet" href="https://cloudflare.com">
     
     <style>
-    /* Dynamic Container - Keeps text and grids from touching the edge of phones */
         .container {
             width: 100%;
             padding-left: 20px !important;
@@ -27,10 +24,9 @@
             margin: 0 auto;
         }
 
-        /* Fluid Sizing for Widescreen Videos (16:9) */
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* Fixed widescreen aspect ratio */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             margin-bottom: 30px;
@@ -43,13 +39,12 @@
             top: 0; left: 0; width: 100%; height: 100%; border: 0;
         }
 
-        /* Fluid Sizing for Vertical YouTube Shorts (9:16) */
         .short-container {
             position: relative;
             width: 100%;
-            max-width: 420px; /* Limits the desktop size so it stays a tight vertical column */
-            margin: 0 auto 30px auto; /* Centers it and leaves a gap below */
-            aspect-ratio: 9 / 16; /* Instructs the browser to scale the height automatically based on current width */
+            max-width: 420px;
+            margin: 0 auto 30px auto;
+            aspect-ratio: 9 / 16;
             border-radius: 8px;
             overflow: hidden;
             background: #000;
@@ -59,12 +54,11 @@
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%; border: 0;
         }
-        /* Smooth Scrolling Configuration */
+
         html {
             scroll-behavior: smooth;
         }
 
-        /* Desktop Sticky Sidebar Menu Layout - Upgraded with Opaque Background Tray */
         .side-nav {
             position: fixed;
             top: 50%;
@@ -74,8 +68,6 @@
             flex-direction: column;
             gap: 18px;
             z-index: 100;
-            
-            /* The Opaque Tray: Dark charcoal tint matches your main banner column text settings */
             background-color: rgba(18, 18, 18, 0.85); 
             padding: 20px 15px 20px 25px;
             border-radius: 12px;
@@ -96,7 +88,6 @@
             transition: color 0.2s ease, transform 0.2s ease;
         }
 
-        /* Tiny dot style indicator following the text layout links */
         .side-nav a::after {
             content: "";
             width: 8px;
@@ -118,7 +109,6 @@
             transform: scale(1.3);
         }
 
-        /* Mobile Viewport Rules - Hide the sidebar panel on smaller screens to maximize content width */
         @media (max-width: 1150px) {
             .side-nav {
                 display: none !important;
@@ -126,9 +116,9 @@
         }
 
         :root {
-            --bg-color: #000000; /* Solid deep black background */
-            --banner-bg: #121212; /* Slightly gray-black for contrast */
-            --accent-color: #ff4757; /* Original Red Scheme */
+            --bg-color: #000000;
+            --banner-bg: #121212;
+            --accent-color: #ff4757;
             --text-color: #ffffff;
             --muted-text: #a4b0be;
         }
@@ -139,7 +129,6 @@
             box-sizing: border-box;
         }
 
-        /* Clean, high-legibility system block styling */
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
@@ -149,7 +138,6 @@
             padding: 0;
         }
 
-        /* Creates a separated background layer ONLY for the tree picture */
         body::before {
             content: "";
             position: fixed;
@@ -157,34 +145,26 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Keeps it behind everything else */
+            z-index: -1;
             background-image: url('IMG_1661.jpg'); 
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            
-            /* TURNS ONLY THE BACKGROUND PHOTO BLACK & WHITE AT 75% */
             filter: grayscale(75%); 
         }
 
-        /* Central Content Container */
         .main-banner {
             width: 100%;
             max-width: 1000px;
             margin: 0 auto;
-            
-            /* SWAP THIS LINE: Dark charcoal tint that lets 15% of the tree background show through */
             background-color: rgba(18, 18, 18, 0.85); 
-            
             box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
             display: flex;
             flex-direction: column;
             position: relative;
             z-index: 2; 
-            /*backdrop-filter: blur(8px); Blurs the background trees right through the container */
         }
 
-        /* Top Banner Image - Full Column Width */
         .top-banner {
             width: 100%; 
             height: 500px;
@@ -192,14 +172,12 @@
             background-image: url('IMG_2028_1.jpg');
             background-size: cover;
             background-position: center;
-            /*border-bottom: 2px solid var(--accent-color);*/ 
         }
 
-        /* Main Band Name Section */
         header {
             text-align: center;
             padding: 40px 0;
-            background-color: transparent; /* Changed from var(--banner-bg) */
+            background-color: transparent;
         }
 
         h1 {
@@ -218,7 +196,6 @@
             margin-bottom: 25px;
         }
 
-        /* Thumbnail Image (IMG_1446) Setup */
         .band-thumbnail {
             width: 150px;
             height: 150px;
@@ -231,7 +208,6 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
 
-        /* Information & Text Blocks */
         section {
             padding: 45px 0;
             border-top: 1px solid #2f3542;
@@ -245,27 +221,6 @@
             padding-left: 10px;
         }
 
-        /* Responsive Video Box */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            background: #000;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        /* Gig Calendar Table */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -277,7 +232,6 @@
         .venue { font-weight: 500; }
         .location { color: var(--muted-text); text-align: right; }
 
-        /* Booking CTA Box */
         .booking-box {
             background-color: #1e1e1e;
             padding: 30px;
@@ -286,7 +240,7 @@
             border: 1px solid #2f3542;
         }
 
-        .booking-btn {
+        .booking-btn, .archive-btn {
             display: inline-block;
             background-color: var(--accent-color);
             color: white;
@@ -297,9 +251,10 @@
             border-radius: 25px;
             margin-top: 20px;
             margin-bottom: 25px;
+            cursor: pointer;
+            border: none;
         }
 
-        /* Heading text for the social section */
         .social-heading {
             font-size: 1.1rem;
             color: var(--muted-text);
@@ -309,94 +264,163 @@
             letter-spacing: 1px;
         }
 
-        /* Centers the logo icons side-by-side */
         .social-tray {
             display: flex;
             justify-content: center;
-            gap: 30px; /* Space between links */
+            gap: 30px;
             margin-top: 5px;
         }
 
-        /* Styles the interactive vector logos */
         .social-link {
             color: var(--text-color);
-            font-size: 2.5rem; /* Touch friendly mobile scaling */
+            font-size: 2.5rem;
             text-decoration: none;
             transition: color 0.2s ease, transform 0.2s ease;
         }
 
-        /* Hover response animations */
         .social-link:hover {
-            color: var(--accent-color); /* Turns signature red */
-            transform: scale(1.15); /* Snaps slightly outward */
+            color: var(--accent-color);
+            transform: scale(1.15);
         }
 
-        /* Bottom Banner Image - Upgraded to Full-Width Screen Span */
         .bottom-banner {
-            width: 100% !important; /* Forces it to break past boundaries and fill the viewport */
-            max-width: 1000px; /* Optional: Keep this if you want it to perfectly square up with the desktop top banner, remove this line if you want it to touch the absolute left and right edges of a massive desktop screen */
-            margin: 0 auto; /* Keeps it perfectly centered on wide desktop setups */
+            width: 100% !important;
+            max-width: 1000px;
+            margin: 0 auto;
             height: 250px;
             background-image: url('IMG_2030_1.jpg');
             background-size: cover;
             background-position: center;
             border-top: 2px solid var(--accent-color);
+            cursor: pointer;
+            position: relative;
         }
 
-        /* Mobile Adjustments */
+        .bottom-banner-hint {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 1px solid var(--accent-color);
+            color: var(--text-color);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--muted-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #2f3542;
+            background: #121212;
+            color: #fff;
+        }
+
+        .admin-action-btn {
+            background: var(--accent-color);
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .delete-btn {
+            background: #d63031;
+            padding: 5px 10px;
+            font-size: 0.85rem;
+        }
+
         @media (max-width: 600px) {
             .top-banner { height: 200px; }
             h1 { font-size: 2.2rem; }
             td { padding: 10px 5px; font-size: 0.9rem; }
             .bottom-banner { height: 150px; }
-            .social-tray { flex-direction: row; gap: 20px; } /* Horizontal alignment on phone display */
+            .social-tray { flex-direction: row; gap: 20px; }
         }
     </style>
 </head>
 <body>
     <div id="top"></div>
     <nav class="side-nav">
-        <a href="#top"><span>Top</span></a> <!-- NEW: Links back up to your invisible target -->
+        <a href="#top"><span>Top</span></a>
         <a href="#videos"><span>Videos</span></a>
         <a href="#bio"><span>Bio</span></a>
         <a href="#shows"><span>Shows</span></a>
         <a href="#booking"><span>Booking</span></a>
     </nav>
     
-    <!-- Central Strip Area -->
     <div class="main-banner">
-        
-        <!-- Top Image Banner (IMG_2028) -->
         <div class="top-banner"></div>
 
-        <!-- Band Title & Info Header -->
         <header>
             <div class="container">
                 <h1>Morgan Smith & Co.</h1>
                 <p class="tagline">Evergreen Bluegrass</p>
-                
-                <!-- Center Embedded Photo Thumbnail (IMG_1446) -->
                 <img src="IMG_1446.jpg" alt="Morgan Smith & Co. Band Portrait" class="band-thumbnail">
             </div>
         </header>
 
-        <!-- Media/Video Section -->
-                <section id="videos" class="container">
-        <section class="container">
+        <section id="videos" class="container">
             <h2>Latest Videos</h2>
             
-            <!-- NEW VIDEO (Top Video) -->
-             <div class="short-container">
+            <div class="short-container">
                 <iframe src="https://www.youtube.com/embed/9kj9lBlZ6fw" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
 
-            <!-- CURRENT VIDEO (Bottom Video) -->
             <div class="video-container">
                 <iframe src="https://youtube.com/embed/sHUS17LkUx8?si=FSN3XdJI2nBXX_0s" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </section>
 
-        <!-- Band Biography Section -->
         <section id="bio" class="container">
             <h2>About The Band</h2>
             <div class="bio-box">
@@ -409,71 +433,217 @@
             </div>
         </section>
         
-        <!-- Tour Schedule Section -->
-                      <section id="shows" class="container">
-        <section class="container">
+        <section id="shows" class="container">
             <h2>Upcoming Shows</h2>
-            <table>
-                <tr>
-                    <td class="date">Aug 8 [12-2]</td>
-                    <td class="venue">Private Party</td>
-                    <td class="location">Indianola, WA</td>
-                </tr>
-                <tr>
-                    <td class="date">Aug 8 [4-6]</td>
-                    <td class="venue">Silverdale Old Town Market</td>
-                    <td class="location">Silverdale, WA</td>
-                </tr>
-                <tr>
-                    <td class="date">Aug 15</td>
-                    <td class="venue">Webbstock</td>
-                    <td class="location">Kingston, WA</td>
-                </tr>
-                <tr>
-                    <td class="date">Sep 11</td>
-                    <td class="venue">Outdoors On The Ave</td>
-                    <td class="location">Seattle, WA</td>
-                </tr>
-                <tr>
-                    <td class="date">Oct 2</td>
-                    <td class="venue">Bushel and Barrel Ciderhouse</td>
-                    <td class="location">Poulsbo, WA</td>
-                </tr>
-                <tr>
-                    <td class="date">Oct 11</td>
-                    <td class="venue">Picha Farms Pumpkin Patch</td>
-                    <td class="location">Puyallup, WA</td>
-                </tr>
+            <table id="upcoming-shows-table">
+                <!-- Dynamic Content Rendered Here -->
             </table>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="archive-btn" onclick="openArchiveModal()">View Show Archive</button>
+            </div>
         </section>
 
-        <!-- Contact/Booking Box -->
-                           <section id="booking" class="container">
-        <section class="container">
+        <section id="booking" class="container">
             <h2>Booking & Contact</h2>
             <div class="booking-box">
                 <p>We are currently booking breweries, wineries, festivals, private events, hootenannies and honky tonks across Washington state and the Pacific Northwest.</p>
                 <a href="mailto:booking@morgansmithmusic.com" class="booking-btn">Email For Bookings</a>
                 
-        <!-- Live Social Media Navigation Tray using fallback web vectors -->
                 <p class="social-heading">Follow us on social media!</p>
                 <div class="social-tray">
-                    <!-- Secure HTTPS Link Applied For Facebook symbol -->
                     <a href="https://www.facebook.com/morgansmith.music.wa/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/2023_Facebook_icon.svg/960px-2023_Facebook_icon.svg.png?_=20231011122028" alt="Facebook Icon" style="width: 40px; height: 40px; vertical-align: middle;">
                     </a>
-                    <!-- Secure HTTPS Link Applied For Instagram symbol -->
                     <a href="https://instagram.com/morgansmithmusicwa" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Instagram-Icon.png/960px-Instagram-Icon.png?_=20230822013318" alt="Instagram Icon" style="width: 40px; height: 40px; vertical-align: middle;">
                     </a>
                 </div>
             </div>
-        </section> <!-- This closes your Booking Section -->
+        </section>
+    </div>
 
-    </div> <!-- This closes your central .main-banner content column -->
+    <!-- Interactive Bottom Banner with Admin Link -->
+    <div class="bottom-banner" onclick="handleAdminLogin()">
+        <span class="bottom-banner-hint">Admin Portal</span>
+    </div>
 
-    <!-- MOVE THE BOTTOM BANNER TO SIT DOWN HERE -->
-    <div class="bottom-banner"></div>
+    <!-- Admin Panel Modal -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Developer Admin Panel</h2>
+                <button class="close-btn" onclick="closeAdminModal()">&times;</button>
+            </div>
 
+            <h3 style="margin-bottom: 10px;">Add New Gig</h3>
+            <form id="addGigForm" onsubmit="handleAddGig(event)" style="margin-bottom: 30px;">
+                <div class="form-group">
+                    <label>Date (For Sorting/Archiving):</label>
+                    <input type="date" id="gigIsoDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Display Date (e.g. Aug 8 [12-2]):</label>
+                    <input type="text" id="gigDisplayDate" placeholder="Aug 8 [12-2]" required>
+                </div>
+                <div class="form-group">
+                    <label>Venue:</label>
+                    <input type="text" id="gigVenue" placeholder="Silverdale Old Town Market" required>
+                </div>
+                <div class="form-group">
+                    <label>Location:</label>
+                    <input type="text" id="gigLocation" placeholder="Silverdale, WA" required>
+                </div>
+                <button type="submit" class="admin-action-btn">Add Show</button>
+            </form>
+
+            <h3>Manage All Shows</h3>
+            <table id="admin-shows-table" style="margin-top: 10px;">
+                <!-- Admin view lists all shows with delete buttons -->
+            </table>
+        </div>
+    </div>
+
+    <!-- Archive Modal -->
+    <div id="archiveModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Show Archive</h2>
+                <button class="close-btn" onclick="closeArchiveModal()">&times;</button>
+            </div>
+            <table id="archive-shows-table">
+                <!-- Archived shows rendered here -->
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Initial Default Gigs List
+        const defaultGigs = [
+            { id: '1', isoDate: '2026-08-08', date: 'Aug 8 [12-2]', venue: 'Private Party', location: 'Indianola, WA' },
+            { id: '2', isoDate: '2026-08-08', date: 'Aug 8 [4-6]', venue: 'Silverdale Old Town Market', location: 'Silverdale, WA' },
+            { id: '3', isoDate: '2026-08-15', date: 'Aug 15', venue: 'Webbstock', location: 'Kingston, WA' },
+            { id: '4', isoDate: '2026-09-11', date: 'Sep 11', venue: 'Outdoors On The Ave', location: 'Seattle, WA' },
+            { id: '5', isoDate: '2026-10-02', date: 'Oct 2', venue: 'Bushel and Barrel Ciderhouse', location: 'Poulsbo, WA' },
+            { id: '6', isoDate: '2026-10-11', date: 'Oct 11', venue: 'Picha Farms Pumpkin Patch', location: 'Puyallup, WA' }
+        ];
+
+        // Developer Password configuration
+        const ADMIN_PASSWORD = "bluegrass2026";
+
+        function getGigs() {
+            const stored = localStorage.getItem('morgansmith_gigs');
+            if (!stored) {
+                localStorage.setItem('morgansmith_gigs', JSON.stringify(defaultGigs));
+                return defaultGigs;
+            }
+            return JSON.parse(stored);
+        }
+
+        function saveGigs(gigs) {
+            localStorage.setItem('morgansmith_gigs', JSON.stringify(gigs));
+            renderGigs();
+        }
+
+        function handleAdminLogin() {
+            const pwd = prompt("Enter Developer Password:");
+            if (pwd === ADMIN_PASSWORD) {
+                document.getElementById('adminModal').style.display = 'flex';
+                renderAdminTable();
+            } else if (pwd !== null) {
+                alert("Incorrect password.");
+            }
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').style.display = 'none';
+        }
+
+        function openArchiveModal() {
+            document.getElementById('archiveModal').style.display = 'flex';
+            renderArchiveTable();
+        }
+
+        function closeArchiveModal() {
+            document.getElementById('archiveModal').style.display = 'none';
+        }
+
+        function handleAddGig(e) {
+            e.preventDefault();
+            const gigs = getGigs();
+            const newGig = {
+                id: Date.now().toString(),
+                isoDate: document.getElementById('gigIsoDate').value,
+                date: document.getElementById('gigDisplayDate').value,
+                venue: document.getElementById('gigVenue').value,
+                location: document.getElementById('gigLocation').value
+            };
+            gigs.push(newGig);
+            saveGigs(gigs);
+            document.getElementById('addGigForm').reset();
+            renderAdminTable();
+        }
+
+        function deleteGig(id) {
+            if (confirm("Are you sure you want to remove this gig?")) {
+                let gigs = getGigs();
+                gigs = gigs.filter(g => g.id !== id);
+                saveGigs(gigs);
+                renderAdminTable();
+            }
+        }
+
+        function renderGigs() {
+            const gigs = getGigs();
+            const today = new Date().toISOString().split('T')[0];
+            const upcomingTable = document.getElementById('upcoming-shows-table');
+            
+            // Auto Filter: Filter out past gigs
+            const upcomingGigs = gigs
+                .filter(g => g.isoDate >= today)
+                .sort((a, b) => a.isoDate.localeCompare(b.isoDate));
+
+            if (upcomingGigs.length === 0) {
+                upcomingTable.innerHTML = `<tr><td colspan="3" style="text-align:center; color: var(--muted-text);">No upcoming shows currently scheduled. Check back soon!</td></tr>`;
+            } else {
+                upcomingTable.innerHTML = upcomingGigs.map(g => `
+                    <tr>
+                        <td class="date">${g.date}</td>
+                        <td class="venue">${g.venue}</td>
+                        <td class="location">${g.location}</td>
+                    </tr>
+                `).join('');
+            }
+        }
+
+        function renderAdminTable() {
+            const gigs = getGigs().sort((a, b) => b.isoDate.localeCompare(a.isoDate));
+            const adminTable = document.getElementById('admin-shows-table');
+            
+            adminTable.innerHTML = gigs.map(g => `
+                <tr>
+                    <td class="date">${g.date}</td>
+                    <td class="venue">${g.venue}</td>
+                    <td class="location">${g.location}</td>
+                    <td><button class="admin-action-btn delete-btn" onclick="deleteGig('${g.id}')">Delete</button></td>
+                </tr>
+            `).join('');
+        }
+
+        function renderArchiveTable() {
+            const gigs = getGigs().sort((a, b) => b.isoDate.localeCompare(a.isoDate));
+            const archiveTable = document.getElementById('archive-shows-table');
+            
+            archiveTable.innerHTML = gigs.map(g => `
+                <tr>
+                    <td class="date">${g.date}</td>
+                    <td class="venue">${g.venue}</td>
+                    <td class="location">${g.location}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Initial Load Render
+        document.addEventListener('DOMContentLoaded', renderGigs);
+    </script>
 </body>
 </html>
