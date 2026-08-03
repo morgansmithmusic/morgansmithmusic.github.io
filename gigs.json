@@ -1,8 +1,44 @@
 [
-  { "id": "1", "isoDate": "2026-08-08", "date": "Aug 8 [12-2]", "venue": "Private Party", "location": "Indianola, WA" },
-  { "id": "2", "isoDate": "2026-08-08", "date": "Aug 8 [4-6]", "venue": "Silverdale Old Town Market", "location": "Silverdale, WA" },
-  { "id": "3", "isoDate": "2026-08-15", "date": "Aug 15", "venue": "Webbstock", "location": "Kingston, WA" },
-  { "id": "4", "isoDate": "2026-09-11", "date": "Sep 11", "venue": "Outdoors On The Ave", "location": "Seattle, WA" },
-  { "id": "5", "isoDate": "2026-10-02", "date": "Oct 2", "venue": "Bushel and Barrel Ciderhouse", "location": "Poulsbo, WA" },
-  { "id": "6", "isoDate": "2026-10-11", "date": "Oct 11", "venue": "Picha Farms Pumpkin Patch", "location": "Puyallup, WA" }
+  {
+    "id": "2026-08-08-privateparty",
+    "isoDate": "2026-08-08",
+    "date": "Aug 8 [12-2]",
+    "venue": "Private Party",
+    "location": "Indianola, WA"
+  },
+  {
+    "id": "2026-08-08-silverdaleoldtownmarket",
+    "isoDate": "2026-08-08",
+    "date": "Aug 8 [4-6]",
+    "venue": "Silverdale Old Town Market",
+    "location": "Silverdale, WA"
+  },
+  {
+    "id": "2026-08-15-webbstock",
+    "isoDate": "2026-08-15",
+    "date": "Aug 15",
+    "venue": "Webbstock",
+    "location": "Kingston, WA"
+  },
+  {
+    "id": "2026-09-11-outdoorsontheave",
+    "isoDate": "2026-09-11",
+    "date": "Sep 11",
+    "venue": "Outdoors On The Ave",
+    "location": "Seattle, WA"
+  },
+  {
+    "id": "2026-10-02-bushelandbarrelciderhouse",
+    "isoDate": "2026-10-02",
+    "date": "Oct 2",
+    "venue": "Bushel and Barrel Ciderhouse",
+    "location": "Poulsbo, WA"
+  },
+  {
+    "id": "2026-10-11-pichafarmspumpkinpatch",
+    "isoDate": "2026-10-11",
+    "date": "Oct 11",
+    "venue": "Picha Farms Pumpkin Patch",
+    "location": "Puyallup, WA"
+  }
 ]
