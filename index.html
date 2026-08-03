@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Morgan Smith & Co. | Bluegrass & Americana Band | Washington State</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="IMG_0001.jpg">
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="Official website for Morgan Smith & Co. Booking high-energy Evergreen Bluegrass, Americana, hootenannies, and honky tonks across Washington state and the Pacific Northwest.">
     <meta name="keywords" content="bluegrass band washington state, hire bluegrass band WA, pacific northwest bluegrass band, evergreen bluegrass, seattle live music, kitsap county acoustic band, book event band washington, wedding bluegrass band PNW, hootenanny honky tonk band, acoustic americana washington">
@@ -25,21 +28,47 @@
     {
       "@context": "https://schema.org",
       "@type": "MusicGroup",
+      "@id": "https://www.morgansmithmusic.com/#identity",
       "name": "Morgan Smith & Co.",
-      "genre": ["Bluegrass", "Americana", "Folk"],
+      "alternateName": "Morgan Smith Band",
       "url": "https://www.morgansmithmusic.com",
       "image": "https://www.morgansmithmusic.com/IMG_2028_1.jpg",
-      "description": "Evergreen Bluegrass and Americana band playing events and festivals across Washington state.",
-      "location": {
-        "@type": "Place",
-        "name": "Washington State, USA"
+      "genre": [
+        "Bluegrass",
+        "Americana",
+        "Folk",
+        "Traditional Country"
+      ],
+      "description": "Morgan Smith & Co. is a Pacific Northwest bluegrass and acoustic roots band based in Kitsap County, Washington, performing traditional and original live music across Western WA.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Silverdale",
+        "addressRegion": "WA",
+        "addressCountry": "US"
       },
+      "areaServed": [
+        {
+          "@type": "AdministrativeArea",
+          "name": "Kitsap County, WA"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Puget Sound Region, WA"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Western Washington"
+        }
+      ],
       "sameAs": [
         "https://www.facebook.com/morgansmith.music.wa/",
         "https://instagram.com/morgansmithmusicwa"
       ]
     }
     </script>
+
+    <!-- Container for Dynamic Event Schema (Populated via JS) -->
+    <script id="event-schema" type="application/ld+json"></script>
     
     <style>
         .container {
@@ -491,6 +520,9 @@
                     </tr>
                 `).join('');
             }
+
+            // Generate Schema for Google Search Console
+            generateEventSchema(gigs);
         }
 
         // Render function for the Show Archive popup window
@@ -507,6 +539,40 @@
                     <td class="location">${g.location}</td>
                 </tr>
             `).join('');
+        }
+
+        // Inject Google Event JSON-LD Schema dynamically
+        function generateEventSchema(gigs) {
+            const today = new Date().toISOString().split('T')[0];
+            const upcomingGigs = gigs.filter(g => g.isoDate >= today);
+
+            const eventsList = upcomingGigs.map(gig => ({
+                "@context": "https://schema.org",
+                "@type": "MusicEvent",
+                "name": `Morgan Smith & Co. Live at ${gig.venue}`,
+                "startDate": gig.isoDate,
+                "eventStatus": "https://schema.org/EventScheduled",
+                "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                "location": {
+                    "@type": "Place",
+                    "name": gig.venue,
+                    "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": gig.location
+                    }
+                },
+                "performer": {
+                    "@type": "MusicGroup",
+                    "@id": "https://www.morgansmithmusic.com/#identity",
+                    "name": "Morgan Smith & Co.",
+                    "url": "https://www.morgansmithmusic.com"
+                }
+            }));
+
+            const schemaContainer = document.getElementById('event-schema');
+            if (schemaContainer) {
+                schemaContainer.textContent = JSON.stringify(eventsList, null, 2);
+            }
         }
 
         // Modal Control Functions
