@@ -3,18 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Morgan Smith & Co. | Official Website</title>
+    <title>Morgan Smith & Co. | Bluegrass & Americana Band | Washington State</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Official website for Morgan Smith & Co. Booking high-energy Evergreen Bluegrass, Americana, hootenannies, and honky tonks across Washington state and the Pacific Northwest.">
+    <meta name="keywords" content="bluegrass band washington state, hire bluegrass band WA, pacific northwest bluegrass band, evergreen bluegrass, seattle live music, kitsap county acoustic band, book event band washington, wedding bluegrass band PNW, hootenanny honky tonk band, acoustic americana washington">
+    <link rel="canonical" href="https://www.morgansmithmusic.com">
 
     <!-- Social Media Link Preview Card Configuration (Open Graph) -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.morgansmithmusic.com">
     <meta property="og:title" content="Morgan Smith & Co. | Official Website">
     <meta property="og:description" content="Official website for Morgan Smith & Co. Booking high-energy Evergreen Bluegrass, Americana, hootenannies, and honky tonks across the Pacific Northwest.">
-    
     <meta property="og:image" content="https://www.morgansmithmusic.com/IMG_2028_1.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <link rel="stylesheet" href="https://cloudflare.com">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MusicGroup",
+      "name": "Morgan Smith & Co.",
+      "genre": ["Bluegrass", "Americana", "Folk"],
+      "url": "https://www.morgansmithmusic.com",
+      "image": "https://www.morgansmithmusic.com/IMG_2028_1.jpg",
+      "description": "Evergreen Bluegrass and Americana band playing events and festivals across Washington state.",
+      "location": {
+        "@type": "Place",
+        "name": "Washington State, USA"
+      },
+      "sameAs": [
+        "https://www.facebook.com/morgansmith.music.wa/",
+        "https://instagram.com/morgansmithmusicwa"
+      ]
+    }
+    </script>
     
     <style>
         .container {
@@ -292,18 +317,6 @@
             background-size: cover;
             background-position: center;
             border-top: 2px solid var(--accent-color);
-            cursor: pointer;
-            position: relative;
-        }
-
-        .bottom-banner-hint {
-            position: absolute;
-            bottom: 10px;
-            right: 15px;
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.4);
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         /* Modal Styles */
@@ -344,41 +357,6 @@
             cursor: pointer;
         }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #2f3542;
-            background: #121212;
-            color: #fff;
-        }
-
-        .admin-action-btn {
-            background: var(--accent-color);
-            color: white;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .delete-btn {
-            background: #d63031;
-            padding: 5px 10px;
-            font-size: 0.85rem;
-        }
-
         @media (max-width: 600px) {
             .top-banner { height: 200px; }
             h1 { font-size: 2.2rem; }
@@ -411,11 +389,9 @@
 
         <section id="videos" class="container">
             <h2>Latest Videos</h2>
-            
             <div class="short-container">
                 <iframe src="https://www.youtube.com/embed/9kj9lBlZ6fw" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
-
             <div class="video-container">
                 <iframe src="https://youtube.com/embed/sHUS17LkUx8?si=FSN3XdJI2nBXX_0s" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
@@ -436,7 +412,7 @@
         <section id="shows" class="container">
             <h2>Upcoming Shows</h2>
             <table id="upcoming-shows-table">
-                <!-- Dynamic Content Rendered Here -->
+                <!-- Dynamically populated from gigs.json -->
             </table>
             <div style="text-align: center; margin-top: 20px;">
                 <button class="archive-btn" onclick="openArchiveModal()">View Show Archive</button>
@@ -462,46 +438,7 @@
         </section>
     </div>
 
-    <!-- Interactive Bottom Banner with Admin Link -->
-    <div class="bottom-banner" onclick="handleAdminLogin()">
-        <span class="bottom-banner-hint">Admin Portal</span>
-    </div>
-
-    <!-- Admin Panel Modal -->
-    <div id="adminModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Developer Admin Panel</h2>
-                <button class="close-btn" onclick="closeAdminModal()">&times;</button>
-            </div>
-
-            <h3 style="margin-bottom: 10px;">Add New Gig</h3>
-            <form id="addGigForm" onsubmit="handleAddGig(event)" style="margin-bottom: 30px;">
-                <div class="form-group">
-                    <label>Date (For Sorting/Archiving):</label>
-                    <input type="date" id="gigIsoDate" required>
-                </div>
-                <div class="form-group">
-                    <label>Display Date (e.g. Aug 8 [12-2]):</label>
-                    <input type="text" id="gigDisplayDate" placeholder="Aug 8 [12-2]" required>
-                </div>
-                <div class="form-group">
-                    <label>Venue:</label>
-                    <input type="text" id="gigVenue" placeholder="Silverdale Old Town Market" required>
-                </div>
-                <div class="form-group">
-                    <label>Location:</label>
-                    <input type="text" id="gigLocation" placeholder="Silverdale, WA" required>
-                </div>
-                <button type="submit" class="admin-action-btn">Add Show</button>
-            </form>
-
-            <h3>Manage All Shows</h3>
-            <table id="admin-shows-table" style="margin-top: 10px;">
-                <!-- Admin view lists all shows with delete buttons -->
-            </table>
-        </div>
-    </div>
+    <div class="bottom-banner"></div>
 
     <!-- Archive Modal -->
     <div id="archiveModal" class="modal">
@@ -517,87 +454,28 @@
     </div>
 
     <script>
-        // Initial Default Gigs List
-        const defaultGigs = [
-            { id: '1', isoDate: '2026-08-08', date: 'Aug 8 [12-2]', venue: 'Private Party', location: 'Indianola, WA' },
-            { id: '2', isoDate: '2026-08-08', date: 'Aug 8 [4-6]', venue: 'Silverdale Old Town Market', location: 'Silverdale, WA' },
-            { id: '3', isoDate: '2026-08-15', date: 'Aug 15', venue: 'Webbstock', location: 'Kingston, WA' },
-            { id: '4', isoDate: '2026-09-11', date: 'Sep 11', venue: 'Outdoors On The Ave', location: 'Seattle, WA' },
-            { id: '5', isoDate: '2026-10-02', date: 'Oct 2', venue: 'Bushel and Barrel Ciderhouse', location: 'Poulsbo, WA' },
-            { id: '6', isoDate: '2026-10-11', date: 'Oct 11', venue: 'Picha Farms Pumpkin Patch', location: 'Puyallup, WA' }
-        ];
-
-        // Developer Password configuration
-        const ADMIN_PASSWORD = "bluegrass2026";
-
-        function getGigs() {
-            const stored = localStorage.getItem('morgansmith_gigs');
-            if (!stored) {
-                localStorage.setItem('morgansmith_gigs', JSON.stringify(defaultGigs));
-                return defaultGigs;
-            }
-            return JSON.parse(stored);
-        }
-
-        function saveGigs(gigs) {
-            localStorage.setItem('morgansmith_gigs', JSON.stringify(gigs));
-            renderGigs();
-        }
-
-        function handleAdminLogin() {
-            const pwd = prompt("Enter Developer Password:");
-            if (pwd === ADMIN_PASSWORD) {
-                document.getElementById('adminModal').style.display = 'flex';
-                renderAdminTable();
-            } else if (pwd !== null) {
-                alert("Incorrect password.");
+        // Fetch shows dynamically from your uploaded gigs.json file
+        async function fetchGigs() {
+            try {
+                const response = await fetch('gigs.json');
+                if (!response.ok) {
+                    throw new Error("Could not find or load gigs.json");
+                }
+                const gigs = await response.json();
+                return gigs;
+            } catch (error) {
+                console.error("Error loading show data:", error);
+                return [];
             }
         }
 
-        function closeAdminModal() {
-            document.getElementById('adminModal').style.display = 'none';
-        }
-
-        function openArchiveModal() {
-            document.getElementById('archiveModal').style.display = 'flex';
-            renderArchiveTable();
-        }
-
-        function closeArchiveModal() {
-            document.getElementById('archiveModal').style.display = 'none';
-        }
-
-        function handleAddGig(e) {
-            e.preventDefault();
-            const gigs = getGigs();
-            const newGig = {
-                id: Date.now().toString(),
-                isoDate: document.getElementById('gigIsoDate').value,
-                date: document.getElementById('gigDisplayDate').value,
-                venue: document.getElementById('gigVenue').value,
-                location: document.getElementById('gigLocation').value
-            };
-            gigs.push(newGig);
-            saveGigs(gigs);
-            document.getElementById('addGigForm').reset();
-            renderAdminTable();
-        }
-
-        function deleteGig(id) {
-            if (confirm("Are you sure you want to remove this gig?")) {
-                let gigs = getGigs();
-                gigs = gigs.filter(g => g.id !== id);
-                saveGigs(gigs);
-                renderAdminTable();
-            }
-        }
-
-        function renderGigs() {
-            const gigs = getGigs();
+        // Main render function for the home page table
+        async function renderGigs() {
+            const gigs = await fetchGigs();
             const today = new Date().toISOString().split('T')[0];
             const upcomingTable = document.getElementById('upcoming-shows-table');
             
-            // Auto Filter: Filter out past gigs
+            // Auto-Filter: Hide past gigs & sort future shows chronologically
             const upcomingGigs = gigs
                 .filter(g => g.isoDate >= today)
                 .sort((a, b) => a.isoDate.localeCompare(b.isoDate));
@@ -615,25 +493,14 @@
             }
         }
 
-        function renderAdminTable() {
-            const gigs = getGigs().sort((a, b) => b.isoDate.localeCompare(a.isoDate));
-            const adminTable = document.getElementById('admin-shows-table');
-            
-            adminTable.innerHTML = gigs.map(g => `
-                <tr>
-                    <td class="date">${g.date}</td>
-                    <td class="venue">${g.venue}</td>
-                    <td class="location">${g.location}</td>
-                    <td><button class="admin-action-btn delete-btn" onclick="deleteGig('${g.id}')">Delete</button></td>
-                </tr>
-            `).join('');
-        }
-
-        function renderArchiveTable() {
-            const gigs = getGigs().sort((a, b) => b.isoDate.localeCompare(a.isoDate));
+        // Render function for the Show Archive popup window
+        async function renderArchiveTable() {
+            const gigs = await fetchGigs();
+            // Sort shows newest to oldest for the archive view
+            const sortedGigs = gigs.sort((a, b) => b.isoDate.localeCompare(a.isoDate));
             const archiveTable = document.getElementById('archive-shows-table');
             
-            archiveTable.innerHTML = gigs.map(g => `
+            archiveTable.innerHTML = sortedGigs.map(g => `
                 <tr>
                     <td class="date">${g.date}</td>
                     <td class="venue">${g.venue}</td>
@@ -642,7 +509,17 @@
             `).join('');
         }
 
-        // Initial Load Render
+        // Modal Control Functions
+        function openArchiveModal() {
+            document.getElementById('archiveModal').style.display = 'flex';
+            renderArchiveTable();
+        }
+
+        function closeArchiveModal() {
+            document.getElementById('archiveModal').style.display = 'none';
+        }
+
+        // Initial load call
         document.addEventListener('DOMContentLoaded', renderGigs);
     </script>
 </body>
