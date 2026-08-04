@@ -337,6 +337,17 @@
             transform: scale(1.15);
         }
 
+        .venue-link {
+            color: var(--muted-text);
+            text-decoration: underline;
+            text-decoration-color: var(--accent-color);
+            transition: color 0.2s ease;
+        }
+
+        .venue-link:hover {
+            color: var(--accent-color);
+        }
+
         .bottom-banner {
             width: 100% !important;
             max-width: 1000px;
@@ -384,6 +395,45 @@
             color: var(--muted-text);
             font-size: 1.5rem;
             cursor: pointer;
+        }
+
+        /* Hover Poster CSS */
+        .hover-poster-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .poster-trigger {
+            color: var(--accent-color);
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .poster-popup {
+            display: none;
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1010;
+            background: #121212;
+            padding: 8px;
+            border: 1px solid var(--accent-color);
+            border-radius: 8px;
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.8);
+        }
+
+        .poster-popup img {
+            max-width: 260px;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+        }
+
+        .hover-poster-container:hover .poster-popup {
+            display: block;
         }
 
         @media (max-width: 600px) {
@@ -477,7 +527,10 @@
             <div style="margin-top: 35px; border-top: 1px solid #2f3542; padding-top: 20px;">
                 <p class="social-heading" style="font-size: 0.85rem; letter-spacing: 1.5px;">Recent Venues & Stage Appearances</p>
                 <p style="color: var(--muted-text); font-size: 0.95rem; line-height: 1.8;">
-                    Bushel & Barrel Ciderhouse • Webbstock • Silverdale Old Town Market • Outdoors On The Ave • Picha Farms
+                    <a href="https://www.facebook.com/bushelandbarrelciderhouse/" target="_blank" rel="noopener noreferrer" class="venue-link">Bushel & Barrel Ciderhouse</a> • 
+                    <a href="https://www.instagram.com/thesipinpoulsbo/" target="_blank" rel="noopener noreferrer" class="venue-link">The Sip in Poulsbo</a> • 
+                    <a href="https://vikingfest.org/" target="_blank" rel="noopener noreferrer" class="venue-link">Viking Fest</a> • 
+                    <a href="https://www.historicdowntownpoulsbo.com/" target="_blank" rel="noopener noreferrer" class="venue-link">Poulsbo's 4th of July</a>
                 </p>
             </div>
         </div>
@@ -493,8 +546,10 @@
                 <h2>Show Archive</h2>
                 <button class="close-btn" onclick="closeArchiveModal()">&times;</button>
             </div>
+            
+            <!-- Dynamic Past Gigs Table -->
             <table id="archive-shows-table">
-                <!-- Archived shows rendered here -->
+                <!-- Dynamically populated only with past gigs from gigs.json -->
             </table>
         </div>
     </div>
@@ -515,16 +570,33 @@
             }
         }
 
+        // Helper: Convert YYYY-MM-DD isoDate string to a local Date object at midnight local time
+        function parseLocalIsoDate(isoDateStr) {
+            if (!isoDateStr) return new Date(0);
+            const dateOnly = isoDateStr.split('T')[0].replace(/\//g, '-');
+            const parts = dateOnly.split('-');
+            if (parts.length === 3) {
+                return new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+            }
+            return new Date(isoDateStr);
+        }
+
+        // Helper: Get today's local date normalized to midnight
+        function getStartOfToday() {
+            const now = new Date();
+            return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        }
+
         // Main render function for the home page table
         async function renderGigs() {
             const gigs = await fetchGigs();
-            const today = new Date().toISOString().split('T')[0];
+            const startOfToday = getStartOfToday();
             const upcomingTable = document.getElementById('upcoming-shows-table');
             
-            // Auto-Filter: Hide past gigs & sort future shows chronologically
+            // Shows taking place today or in the future stay on the home page
             const upcomingGigs = gigs
-                .filter(g => g.isoDate >= today)
-                .sort((a, b) => a.isoDate.localeCompare(b.isoDate));
+                .filter(g => parseLocalIsoDate(g.isoDate) >= startOfToday)
+                .sort((a, b) => parseLocalIsoDate(a.isoDate) - parseLocalIsoDate(b.isoDate));
 
             if (upcomingGigs.length === 0) {
                 upcomingTable.innerHTML = `<tr><td colspan="3" style="text-align:center; color: var(--muted-text);">No upcoming shows currently scheduled. Check back soon!</td></tr>`;
@@ -542,26 +614,34 @@
             generateEventSchema(gigs);
         }
 
-        // Render function for the Show Archive popup window
+        // Render function for the Show Archive popup window (PAST SHOWS ONLY)
         async function renderArchiveTable() {
             const gigs = await fetchGigs();
-            // Sort shows newest to oldest for the archive view
-            const sortedGigs = gigs.sort((a, b) => b.isoDate.localeCompare(a.isoDate));
+            const startOfToday = getStartOfToday();
             const archiveTable = document.getElementById('archive-shows-table');
             
-            archiveTable.innerHTML = sortedGigs.map(g => `
-                <tr>
-                    <td class="date">${g.date}</td>
-                    <td class="venue">${g.venue}</td>
-                    <td class="location">${g.location}</td>
-                </tr>
-            `).join('');
+            // Strictly filter for shows prior to today & sort newest to oldest
+            const pastGigs = gigs
+                .filter(g => parseLocalIsoDate(g.isoDate) < startOfToday)
+                .sort((a, b) => parseLocalIsoDate(b.isoDate) - parseLocalIsoDate(a.isoDate));
+            
+            if (pastGigs.length === 0) {
+                archiveTable.innerHTML = `<tr><td colspan="3" style="text-align:center; color: var(--muted-text); padding-top: 15px;">No past date-logged shows in archive yet.</td></tr>`;
+            } else {
+                archiveTable.innerHTML = pastGigs.map(g => `
+                    <tr>
+                        <td class="date">${g.date}</td>
+                        <td class="venue">${g.venue}</td>
+                        <td class="location">${g.location}</td>
+                    </tr>
+                `).join('');
+            }
         }
 
         // Inject Google Event JSON-LD Schema dynamically
         function generateEventSchema(gigs) {
-            const today = new Date().toISOString().split('T')[0];
-            const upcomingGigs = gigs.filter(g => g.isoDate >= today);
+            const startOfToday = getStartOfToday();
+            const upcomingGigs = gigs.filter(g => parseLocalIsoDate(g.isoDate) >= startOfToday);
 
             const eventsList = upcomingGigs.map(gig => ({
                 "@context": "https://schema.org",
