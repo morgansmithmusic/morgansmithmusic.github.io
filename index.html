@@ -561,7 +561,7 @@
     </div>
 
     <!-- Clickable Password-Protected Bottom Banner -->
-    <div class="bottom-banner" onclick="handleBannerClick()"></div>
+    <div class="bottom-banner" onclick="handleBannerClick()" style="cursor: pointer;"></div>
 
     <!-- Archive Modal -->
     <div id="archiveModal" class="modal">
@@ -579,23 +579,25 @@
     </div>
 
     <script>
-        // Password Gated Banner Download Functionality
+        // Case-Sensitive Password Download without Hardcoded Password in Source Code
         function handleBannerClick() {
-            // Set your secret password here:
-            const epkPassword = filename; 
-            const promptInput = prompt("Enter password to download EPK:");
+            const promptInput = prompt("Enter press kit password:");
 
-            if (promptInput === epkPassword) {
-                // Initiates download of the zip file in the root directory
-                const downloadLink = document.createElement('a');
-                downloadLink.href = 'Morgan_Smith_and_Co_Press_Kit.zip';
-                downloadLink.download = 'Morgan_Smith_and_Co_Press_Kit.zip';
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-                document.body.removeChild(downloadLink);
-            } else if (promptInput !== null) {
-                alert("Incorrect password. Please email booking@morgansmithmusic.com to request access.");
-            }
+            // Exit if user cancels or submits empty text
+            if (!promptInput || promptInput.trim() === "") return;
+
+            // Preserves exact case-sensitivity and removes trailing spaces
+            const formattedInput = promptInput.trim();
+            const targetZipFile = `${formattedInput}.zip`;
+
+            // Create an invisible link element and attempt to trigger the download
+            const downloadLink = document.createElement('a');
+            downloadLink.href = targetZipFile;
+            downloadLink.download = 'Morgan_Smith_and_Co_Press_Kit.zip'; 
+            
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
         }
 
         // Fetch shows dynamically from your uploaded gigs.json file
