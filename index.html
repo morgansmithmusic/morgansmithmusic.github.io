@@ -263,15 +263,13 @@
         }
 
         .band-thumbnail {
-            width: 150px;
-            height: 150px;
+            width: 240px;
+            height: 240px;
             border-radius: 50%;
-            border: 3px solid var(--text-color);
             object-fit: cover;
-            object-position: center;
-            margin: 0 auto;
-            display: block;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            border: 3px solid #ffffff;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            margin-top: 20px;
         }
 
         section {
@@ -369,6 +367,14 @@
             background-size: cover;
             background-position: center;
             border-top: 2px solid var(--accent-color);
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+            transition: filter 0.2s ease;
+        }
+
+        .bottom-banner:hover {
+            filter: brightness(1.1);
         }
 
         /* Modal Styles */
@@ -474,7 +480,7 @@
             <div class="container">
                 <h1>Morgan Smith & Co.</h1>
                 <p class="tagline">Evergreen Bluegrass</p>
-                <img src="IMG_1446.jpg" alt="Morgan Smith & Co. Band Portrait" class="band-thumbnail">
+                <img src="IMG_1446.jpg" alt="Morgan Smith - Mandolinist and Bandleader" class="band-thumbnail" style="width: 240px; height: 240px; margin-top: 20px;">
             </div>
         </header>
 
@@ -513,43 +519,49 @@
             </div>
         </section>
 
-    <section id="booking" class="container">
-        <h2>Booking & Contact</h2>
-        <div class="booking-box">
-            <p>We are currently booking breweries, wineries, festivals, private events, hootenannies, and honky tonks across Washington state and the Pacific Northwest.</p>
-        
-            <!-- Visible Email Display + Mailto -->
-            <a href="mailto:booking@morgansmithmusic.com" class="booking-btn">Email For Bookings</a>
-            <p style="color: var(--muted-text); font-size: 0.95rem; margin-top: -10px;">
-                Direct Email: <strong style="color: var(--text-color);">booking@morgansmithmusic.com</strong>
-            </p>
-
-            <!-- Social Links -->
-            <p class="social-heading">Follow us on social media!</p>
-            <div class="social-tray">
-                <a href="https://www.facebook.com/morgansmith.music.wa/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/2023_Facebook_icon.svg/960px-2023_Facebook_icon.svg.png?_=20231011122028" alt="Facebook Icon" style="width: 40px; height: 40px; vertical-align: middle;">
-                </a>
-                <a href="https://instagram.com/morgansmithmusicwa" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Instagram-Icon.png/960px-Instagram-Icon.png?_=20230822013318" alt="Instagram Icon" style="width: 40px; height: 40px; vertical-align: middle;">
-                </a>
-            </div>
-
-            <!-- Venue & Festival Social Proof Bar -->
-            <div style="margin-top: 35px; border-top: 1px solid #2f3542; padding-top: 20px;">
-                <p class="social-heading" style="font-size: 0.85rem; letter-spacing: 1.5px;">Recent Venues & Stage Appearances</p>
-                <p style="color: var(--muted-text); font-size: 0.95rem; line-height: 1.8;">
-                    <a href="https://www.facebook.com/bushelandbarrelciderhouse/" target="_blank" rel="noopener noreferrer" class="venue-link">Bushel & Barrel Ciderhouse</a> • 
-                    <a href="https://www.instagram.com/pouryoursip/" target="_blank" rel="noopener noreferrer" class="venue-link">The Sip in Poulsbo</a> • 
-                    <a href="https://vikingfest.org/" target="_blank" rel="noopener noreferrer" class="venue-link">Viking Fest</a> • 
-                    <a href="https://www.historicdowntownpoulsbo.com/" target="_blank" rel="noopener noreferrer" class="venue-link">Poulsbo's 4th of July</a>
+        <section id="booking" class="container">
+            <h2>Booking & Contact</h2>
+            <div class="booking-box">
+                <p>We are currently booking breweries, wineries, festivals, private events, hootenannies, and honky tonks across Washington state and the Pacific Northwest.</p>
+            
+                <!-- Visible Email Display + Mailto -->
+                <a href="mailto:booking@morgansmithmusic.com" class="booking-btn">Email For Bookings</a>
+                <p style="color: var(--muted-text); font-size: 0.95rem; margin-top: -10px;">
+                    Direct Email: <strong style="color: var(--text-color);">booking@morgansmithmusic.com</strong>
                 </p>
+
+                <!-- Social Links -->
+                <p class="social-heading">Follow us on social media!</p>
+                <div class="social-tray">
+                    <a href="https://www.facebook.com/morgansmith.music.wa/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/2023_Facebook_icon.svg/960px-2023_Facebook_icon.svg.png?_=20231011122028" alt="Facebook Icon" style="width: 40px; height: 40px; vertical-align: middle;">
+                    </a>
+                    <a href="https://instagram.com/morgansmithmusicwa" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Instagram-Icon.png/960px-Instagram-Icon.png?_=20230822013318" alt="Instagram Icon" style="width: 40px; height: 40px; vertical-align: middle;">
+                    </a>
+                </div>
+
+                <!-- Logo as Signature Stamp -->
+                <div style="margin-top: 35px; margin-bottom: 10px;">
+                    <img src="logo_transparent.png" alt="Morgan Smith & Co. Logo" style="max-width: 350px; width: 100%; height: auto; display: block; margin: 0 auto;">
+                </div>
+
+                <!-- Venue & Festival Social Proof Bar -->
+                <div style="margin-top: 35px; border-top: 1px solid #2f3542; padding-top: 20px;">
+                    <p class="social-heading" style="font-size: 0.85rem; letter-spacing: 1.5px;">Recent Venues & Stage Appearances</p>
+                    <p style="color: var(--muted-text); font-size: 0.95rem; line-height: 1.8;">
+                        <a href="https://www.facebook.com/bushelandbarrelciderhouse/" target="_blank" rel="noopener noreferrer" class="venue-link">Bushel & Barrel Ciderhouse</a> • 
+                        <a href="https://www.instagram.com/pouryoursip/" target="_blank" rel="noopener noreferrer" class="venue-link">The Sip in Poulsbo</a> • 
+                        <a href="https://vikingfest.org/" target="_blank" rel="noopener noreferrer" class="venue-link">Viking Fest</a> • 
+                        <a href="https://www.historicdowntownpoulsbo.com/" target="_blank" rel="noopener noreferrer" class="venue-link">Poulsbo's 4th of July</a>
+                    </p>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
     </div>
 
-    <div class="bottom-banner"></div>
+    <!-- Clickable Password-Protected Bottom Banner -->
+    <div class="bottom-banner" onclick="handleBannerClick()"></div>
 
     <!-- Archive Modal -->
     <div id="archiveModal" class="modal">
@@ -567,6 +579,25 @@
     </div>
 
     <script>
+        // Password Gated Banner Download Functionality
+        function handleBannerClick() {
+            // Set your secret password here:
+            const epkPassword = filename; 
+            const promptInput = prompt("Enter password to download EPK:");
+
+            if (promptInput === epkPassword) {
+                // Initiates download of the zip file in the root directory
+                const downloadLink = document.createElement('a');
+                downloadLink.href = 'Morgan_Smith_and_Co_Press_Kit.zip';
+                downloadLink.download = 'Morgan_Smith_and_Co_Press_Kit.zip';
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            } else if (promptInput !== null) {
+                alert("Incorrect password. Please email booking@morgansmithmusic.com to request access.");
+            }
+        }
+
         // Fetch shows dynamically from your uploaded gigs.json file
         async function fetchGigs() {
             try {
