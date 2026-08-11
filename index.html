@@ -291,10 +291,35 @@
         }
 
         tr { border-bottom: 1px solid #2f3542; }
-        td { padding: 15px 10px; font-size: 1.1rem; }
-        .date { font-weight: bold; color: var(--accent-color); width: 25%; }
+        td { padding: 15px 10px; font-size: 1.1rem; vertical-align: middle; }
+        .date { font-weight: bold; color: var(--accent-color); width: 30%; }
         .venue { font-weight: 500; }
         .location { color: var(--muted-text); text-align: right; }
+
+        .lineup-badge {
+            display: inline-block;
+            background-color: #2f3542;
+            color: var(--muted-text);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-left: 8px;
+            vertical-align: middle;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .gig-link {
+            color: var(--text-color);
+            text-decoration: underline;
+            text-decoration-color: var(--accent-color);
+            transition: color 0.2s ease;
+        }
+
+        .gig-link:hover {
+            color: var(--accent-color);
+        }
 
         .booking-box {
             background-color: #1e1e1e;
@@ -415,49 +440,12 @@
             cursor: pointer;
         }
 
-        /* Hover Poster CSS */
-        .hover-poster-container {
-            position: relative;
-            display: inline-block;
-        }
-
-        .poster-trigger {
-            color: var(--accent-color);
-            text-decoration: underline;
-            text-decoration-style: dotted;
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        .poster-popup {
-            display: none;
-            position: absolute;
-            bottom: 120%;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1010;
-            background: #121212;
-            padding: 8px;
-            border: 1px solid var(--accent-color);
-            border-radius: 8px;
-            box-shadow: 0px 4px 20px rgba(0,0,0,0.8);
-        }
-
-        .poster-popup img {
-            max-width: 260px;
-            height: auto;
-            display: block;
-            border-radius: 4px;
-        }
-
-        .hover-poster-container:hover .poster-popup {
-            display: block;
-        }
-
         @media (max-width: 600px) {
             .top-banner { height: 200px; }
             h1 { font-size: 2.2rem; }
             td { padding: 10px 5px; font-size: 0.9rem; }
+            .date { width: 35%; }
+            .lineup-badge { display: block; margin-left: 0; margin-top: 4px; width: fit-content; }
             .bottom-banner { height: 150px; }
             .social-tray { flex-direction: row; gap: 20px; }
         }
@@ -632,6 +620,29 @@
             return new Date(now.getFullYear(), now.getMonth(), now.getDate());
         }
 
+        // Helper: Generate row HTML for gig entry
+        function buildGigRow(g) {
+            // Venue cell with optional hyperlink
+            let venueHtml = g.venue || '';
+            if (g.url && g.url.trim() !== '') {
+                venueHtml = `<a href="${g.url}" target="_blank" rel="noopener noreferrer" class="gig-link">${g.venue}</a>`;
+            }
+
+            // Lineup badge (Optional)
+            let lineupHtml = '';
+            if (g.lineup && g.lineup.trim() !== '') {
+                lineupHtml = `<span class="lineup-badge">${g.lineup}</span>`;
+            }
+
+            return `
+                <tr>
+                    <td class="date">${g.date || ''}</td>
+                    <td class="venue">${venueHtml}${lineupHtml}</td>
+                    <td class="location">${g.location || ''}</td>
+                </tr>
+            `;
+        }
+
         // Main render function for the home page table
         async function renderGigs() {
             const gigs = await fetchGigs();
@@ -646,13 +657,7 @@
             if (upcomingGigs.length === 0) {
                 upcomingTable.innerHTML = `<tr><td colspan="3" style="text-align:center; color: var(--muted-text);">No upcoming shows currently scheduled. Check back soon!</td></tr>`;
             } else {
-                upcomingTable.innerHTML = upcomingGigs.map(g => `
-                    <tr>
-                        <td class="date">${g.date}</td>
-                        <td class="venue">${g.venue}</td>
-                        <td class="location">${g.location}</td>
-                    </tr>
-                `).join('');
+                upcomingTable.innerHTML = upcomingGigs.map(buildGigRow).join('');
             }
 
             // Generate Schema for Google Search Console
@@ -673,13 +678,7 @@
             if (pastGigs.length === 0) {
                 archiveTable.innerHTML = `<tr><td colspan="3" style="text-align:center; color: var(--muted-text); padding-top: 15px;">No past date-logged shows in archive yet.</td></tr>`;
             } else {
-                archiveTable.innerHTML = pastGigs.map(g => `
-                    <tr>
-                        <td class="date">${g.date}</td>
-                        <td class="venue">${g.venue}</td>
-                        <td class="location">${g.location}</td>
-                    </tr>
-                `).join('');
+                archiveTable.innerHTML = pastGigs.map(buildGigRow).join('');
             }
         }
 
@@ -688,28 +687,51 @@
             const startOfToday = getStartOfToday();
             const upcomingGigs = gigs.filter(g => parseLocalIsoDate(g.isoDate) >= startOfToday);
 
-            const eventsList = upcomingGigs.map(gig => ({
-                "@context": "https://schema.org",
-                "@type": "MusicEvent",
-                "name": `Morgan Smith & Co. Live at ${gig.venue}`,
-                "startDate": gig.isoDate,
-                "eventStatus": "https://schema.org/EventScheduled",
-                "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-                "location": {
-                    "@type": "Place",
-                    "name": gig.venue,
-                    "address": {
-                        "@type": "PostalAddress",
-                        "addressLocality": gig.location
-                    }
-                },
-                "performer": {
-                    "@type": "MusicGroup",
-                    "@id": "https://www.morgansmithmusic.com/#identity",
-                    "name": "Morgan Smith & Co.",
-                    "url": "https://www.morgansmithmusic.com"
+            const eventsList = upcomingGigs.map(gig => {
+                const isoBase = gig.isoDate ? gig.isoDate.split('T')[0] : '';
+                
+                let startISO = isoBase;
+                let endISO = isoBase;
+
+                if (gig.startTime && isoBase) {
+                    startISO = `${isoBase}T${gig.startTime}:00`;
                 }
-            }));
+                if (gig.endTime && isoBase) {
+                    endISO = `${isoBase}T${gig.endTime}:00`;
+                }
+
+                const eventSchemaObj = {
+                    "@context": "https://schema.org",
+                    "@type": "MusicEvent",
+                    "name": `Morgan Smith & Co. Live at ${gig.venue}`,
+                    "startDate": startISO,
+                    "eventStatus": "https://schema.org/EventScheduled",
+                    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                    "location": {
+                        "@type": "Place",
+                        "name": gig.venue,
+                        "address": {
+                            "@type": "PostalAddress",
+                            "addressLocality": gig.location
+                        }
+                    },
+                    "performer": {
+                        "@type": "MusicGroup",
+                        "@id": "https://www.morgansmithmusic.com/#identity",
+                        "name": "Morgan Smith & Co.",
+                        "url": "https://www.morgansmithmusic.com"
+                    }
+                };
+
+                if (gig.endTime) {
+                    eventSchemaObj.endDate = endISO;
+                }
+                if (gig.url) {
+                    eventSchemaObj.url = gig.url;
+                }
+
+                return eventSchemaObj;
+            });
 
             const schemaContainer = document.getElementById('event-schema');
             if (schemaContainer) {
