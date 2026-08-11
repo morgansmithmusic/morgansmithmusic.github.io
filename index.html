@@ -620,11 +620,11 @@
             return new Date(now.getFullYear(), now.getMonth(), now.getDate());
         }
 
-        // Helper: Generate row HTML for gig entry
+// Helper: Generate row HTML for gig entry
         function buildGigRow(g) {
-            // Venue cell with optional hyperlink
+            // Venue cell with optional hyperlink (only if url is a valid HTTP link)
             let venueHtml = g.venue || '';
-            if (g.url && g.url.trim() !== '') {
+            if (g.url && g.url.trim().toLowerCase().startsWith('http')) {
                 venueHtml = `<a href="${g.url}" target="_blank" rel="noopener noreferrer" class="gig-link">${g.venue}</a>`;
             }
 
