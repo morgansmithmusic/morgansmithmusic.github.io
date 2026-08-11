@@ -540,24 +540,6 @@
                 <button class="archive-btn" onclick="openArchiveModal()">View Show Archive</button>
             </div>
         </section>
-
-        <section id="tipjar" class="container">
-            <h2>Digital Tip Jar</h2>
-            <div class="booking-box">
-                <p style="font-size: 1.1rem; margin-bottom: 20px;">
-                    Enjoying the music? Drop a little something in the virtual tip jar to keep the instruments tuned and the band on the road!
-                </p>
-                
-                <div class="tip-tray">
-                    <a href="https://venmo.com/u/morgangsmith360" target="_blank" rel="noopener noreferrer" class="tip-btn venmo-btn">
-                        <svg class="tip-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M19.5 3c.9 1.5 1.3 3.1 1.3 4.9 0 6.1-5.2 12.3-9.5 16.1H4.5L1.2 3.8l5.8-.5 1.9 13.1c1.9-2.3 4.1-6.1 4.1-9.2 0-1.2-.3-2.2-.8-2.9L19.5 3z"/>
-                        </svg>
-                        Tip via Venmo (@morgangsmith360)
-                    </a>
-                </div>
-            </div>
-        </section>
         
         <section id="booking" class="container">
             <h2>Booking & Contact</h2>
@@ -617,8 +599,12 @@
         </section>
     </div>
 
-    <!-- Clickable Password-Protected Bottom Banner -->
-    <div class="bottom-banner" onclick="handleBannerClick()" style="cursor: pointer;"></div>
+<!-- Clickable EPK Download Banner goes right here -->
+    <div class="bottom-banner" onclick="handleBannerClick()" style="display: flex; align-items: center; justify-content: center; text-decoration: none;">
+        <span style="background: rgba(0,0,0,0.75); color: #fff; padding: 10px 20px; border-radius: 20px; font-weight: bold; font-size: 0.95rem; letter-spacing: 1px; border: 1px solid var(--accent-color);">
+            📥 CLICK HERE TO DOWNLOAD OFFICIAL PRESS KIT & PROMO ASSETS
+        </span>
+    </div>
 
     <!-- Archive Modal -->
     <div id="archiveModal" class="modal">
@@ -636,20 +622,11 @@
     </div>
 
     <script>
-        // Case-Sensitive Password Download without Hardcoded Password in Source Code
+// Direct Download / Open Press Kit
         function handleBannerClick() {
-            const promptInput = prompt("Enter press kit password:");
-
-            // Exit if user cancels or submits empty text
-            if (!promptInput || promptInput.trim() === "") return;
-
-            // Preserves exact case-sensitivity and removes trailing spaces
-            const formattedInput = promptInput.trim();
-            const targetZipFile = `${formattedInput}.zip`;
-
-            // Create an invisible link element and attempt to trigger the download
+            // Direct link to your press kit ZIP or a public Google Drive folder
             const downloadLink = document.createElement('a');
-            downloadLink.href = targetZipFile;
+            downloadLink.href = 'Morgan_Smith_and_Co_Press_Kit.zip'; 
             downloadLink.download = 'Morgan_Smith_and_Co_Press_Kit.zip'; 
             
             document.body.appendChild(downloadLink);
