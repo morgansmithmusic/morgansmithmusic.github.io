@@ -35,7 +35,7 @@
     <meta name="twitter:description" content="Official website for Morgan Smith & Co. Booking high-energy Evergreen Bluegrass at breweries and wineries, honky tonks and hootenannies across the Pacific Northwest.">
     <meta name="twitter:image" content="https://www.morgansmithmusic.com/IMG_2028_1.jpg">
 
-    <!-- Schema.org Structured Data -->
+    <!-- Schema.org Structured Data (Base Band Identity) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -74,12 +74,13 @@
       ],
       "sameAs": [
         "https://www.facebook.com/morgansmith.music.wa/",
-        "https://instagram.com/morgansmithmusicwa"
+        "https://instagram.com/morgansmithmusicwa",
+        "https://morgansmithmusic.substack.com"
       ]
     }
     </script>
 
-    <!-- Container for Dynamic Event Schema (Populated via JS) -->
+    <!-- Container for Dynamic Event Schema (Auto-populated from gigs.json via JS) -->
     <script id="event-schema" type="application/ld+json"></script>
     
     <style>
@@ -439,7 +440,8 @@
             font-size: 1.5rem;
             cursor: pointer;
         }
-/* Tip Jar Styling */
+
+        /* Tip Jar Styling */
         .tip-tray {
             display: flex;
             justify-content: center;
@@ -486,11 +488,12 @@
 </head>
 <body>
     <div id="top"></div>
-<nav class="side-nav">
+    <nav class="side-nav">
         <a href="#top"><span>Top</span></a>
         <a href="#videos"><span>Videos</span></a>
         <a href="#bio"><span>Bio</span></a>
         <a href="#shows"><span>Shows</span></a>
+        <a href="#newsletter"><span>Newsletter</span></a>
         <a href="#booking"><span>Booking</span></a>
         <a href="#tipjar"><span>Tip Jar</span></a>
     </nav>
@@ -540,6 +543,19 @@
                 <button class="archive-btn" onclick="openArchiveModal()">View Show Archive</button>
             </div>
         </section>
+
+        <!-- Newsletter Section -->
+        <section id="newsletter" class="container" style="text-align: center; padding: 40px 20px;">
+            <h2>Join The Mailing List</h2>
+            <p style="color: var(--muted-text); max-width: 600px; margin: 0 auto 20px auto; font-size: 1.05rem;">
+                Get monthly show updates, venue announcements, exclusive live audio, and other shenanigans delivered straight to your inbox.
+            </p>
+            
+            <!-- Styled Substack Container -->
+            <div style="max-width: 480px; margin: 0 auto; background: #121212; padding: 15px; border-radius: 12px; border: 1px solid #2f3542;">
+                <iframe src="https://morgansmithmusic.substack.com/embed" width="100%" height="150" style="border:none; background:transparent;" frameborder="0" scrolling="no"></iframe>
+            </div>
+        </section>
         
         <section id="booking" class="container">
             <h2>Booking & Contact</h2>
@@ -580,6 +596,7 @@
                 </div>
             </div>
         </section>
+
         <section id="tipjar" class="container">
             <h2>Digital Tip Jar</h2>
             <div class="booking-box">
@@ -599,7 +616,7 @@
         </section>
     </div>
 
-<!-- Clickable EPK Download Banner goes right here -->
+    <!-- Clickable EPK Download Banner -->
     <div class="bottom-banner" onclick="handleBannerClick()" style="display: flex; align-items: center; justify-content: center; text-decoration: none;">
         <span style="background: rgba(0,0,0,0.75); color: #fff; padding: 10px 20px; border-radius: 20px; font-weight: bold; font-size: 0.95rem; letter-spacing: 1px; border: 1px solid var(--accent-color);">
             📥 CLICK HERE TO DOWNLOAD OFFICIAL PRESS KIT & PROMO ASSETS
@@ -622,9 +639,8 @@
     </div>
 
     <script>
-// Direct Download / Open Press Kit
+        // Direct Download / Open Press Kit
         function handleBannerClick() {
-            // Direct link to your press kit ZIP or a public Google Drive folder
             const downloadLink = document.createElement('a');
             downloadLink.href = 'Morgan_Smith_and_Co_Press_Kit.zip'; 
             downloadLink.download = 'Morgan_Smith_and_Co_Press_Kit.zip'; 
@@ -666,15 +682,13 @@
             return new Date(now.getFullYear(), now.getMonth(), now.getDate());
         }
 
-// Helper: Generate row HTML for gig entry
+        // Helper: Generate row HTML for gig entry
         function buildGigRow(g) {
-            // Venue cell with optional hyperlink (only if url is a valid HTTP link)
             let venueHtml = g.venue || '';
             if (g.url && g.url.trim().toLowerCase().startsWith('http')) {
                 venueHtml = `<a href="${g.url}" target="_blank" rel="noopener noreferrer" class="gig-link">${g.venue}</a>`;
             }
 
-            // Lineup badge (Optional)
             let lineupHtml = '';
             if (g.lineup && g.lineup.trim() !== '') {
                 lineupHtml = `<span class="lineup-badge">${g.lineup}</span>`;
@@ -695,7 +709,6 @@
             const startOfToday = getStartOfToday();
             const upcomingTable = document.getElementById('upcoming-shows-table');
             
-            // Shows taking place today or in the future stay on the home page
             const upcomingGigs = gigs
                 .filter(g => parseLocalIsoDate(g.isoDate) >= startOfToday)
                 .sort((a, b) => parseLocalIsoDate(a.isoDate) - parseLocalIsoDate(b.isoDate));
@@ -706,7 +719,7 @@
                 upcomingTable.innerHTML = upcomingGigs.map(buildGigRow).join('');
             }
 
-            // Generate Schema for Google Search Console
+            // Generate Schema for Google Search Console dynamically
             generateEventSchema(gigs);
         }
 
@@ -716,7 +729,6 @@
             const startOfToday = getStartOfToday();
             const archiveTable = document.getElementById('archive-shows-table');
             
-            // Strictly filter for shows prior to today & sort newest to oldest
             const pastGigs = gigs
                 .filter(g => parseLocalIsoDate(g.isoDate) < startOfToday)
                 .sort((a, b) => parseLocalIsoDate(b.isoDate) - parseLocalIsoDate(a.isoDate));
@@ -728,7 +740,7 @@
             }
         }
 
-        // Inject Google Event JSON-LD Schema dynamically
+        // Inject Google Event JSON-LD Schema dynamically from gigs.json
         function generateEventSchema(gigs) {
             const startOfToday = getStartOfToday();
             const upcomingGigs = gigs.filter(g => parseLocalIsoDate(g.isoDate) >= startOfToday);
@@ -736,15 +748,9 @@
             const eventsList = upcomingGigs.map(gig => {
                 const isoBase = gig.isoDate ? gig.isoDate.split('T')[0] : '';
                 
-                let startISO = isoBase;
-                let endISO = isoBase;
-
-                if (gig.startTime && isoBase) {
-                    startISO = `${isoBase}T${gig.startTime}:00`;
-                }
-                if (gig.endTime && isoBase) {
-                    endISO = `${isoBase}T${gig.endTime}:00`;
-                }
+                // Format ISO 8601 with Pacific Time (-07:00 offset)
+                const startTimeStr = gig.startTime ? `${gig.startTime}:00` : "19:00:00";
+                const startISO = `${isoBase}T${startTimeStr}-07:00`;
 
                 const eventSchemaObj = {
                     "@context": "https://schema.org",
@@ -758,7 +764,9 @@
                         "name": gig.venue,
                         "address": {
                             "@type": "PostalAddress",
-                            "addressLocality": gig.location
+                            "addressLocality": gig.location.split(',')[0].trim(),
+                            "addressRegion": "WA",
+                            "addressCountry": "US"
                         }
                     },
                     "performer": {
@@ -766,14 +774,19 @@
                         "@id": "https://www.morgansmithmusic.com/#identity",
                         "name": "Morgan Smith & Co.",
                         "url": "https://www.morgansmithmusic.com"
-                    }
+                    },
+                    "description": `Morgan Smith & Co. live at ${gig.venue} in ${gig.location}.`
                 };
 
                 if (gig.endTime) {
-                    eventSchemaObj.endDate = endISO;
+                    eventSchemaObj.endDate = `${isoBase}T${gig.endTime}:00-07:00`;
                 }
-                if (gig.url) {
-                    eventSchemaObj.url = gig.url;
+
+                if (gig.url && gig.url.trim().toLowerCase().startsWith('http')) {
+                    eventSchemaObj.offers = {
+                        "@type": "Offer",
+                        "url": gig.url
+                    };
                 }
 
                 return eventSchemaObj;
