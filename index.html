@@ -296,6 +296,20 @@
         .date { font-weight: bold; color: var(--accent-color); width: 30%; }
         .venue { font-weight: 500; }
         .location { color: var(--muted-text); text-align: right; }
+        
+        .directions-link {
+            font-size: 0.85rem;
+            color: var(--muted-text);
+            text-decoration: underline;
+            text-decoration-color: var(--accent-color);
+            margin-left: 6px;
+            transition: color 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .directions-link:hover {
+            color: var(--accent-color);
+        }
 
         .lineup-badge {
             display: inline-block;
@@ -682,30 +696,30 @@
             return new Date(now.getFullYear(), now.getMonth(), now.getDate());
         }
 
-        // Helper: Generate row HTML for gig entry with Google Maps search link
+        // Helper: Generate row HTML for gig entry with event link on venue and inline (Directions) link on location
         function buildGigRow(g) {
-            let mapQuery = g.venue || '';
-            if (g.address) {
-                mapQuery += `, ${g.address}`;
+            let venueHtml = g.venue || '';
+            if (g.url && g.url.trim().toLowerCase().startsWith('http')) {
+                venueHtml = `<a href="${g.url}" target="_blank" rel="noopener noreferrer" class="gig-link" title="View Event Page">${g.venue}</a>`;
             }
-            if (g.location) {
-                mapQuery += `, ${g.location}`;
-            }
-
-            const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`;
-            
-            let venueHtml = `<a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="gig-link" title="Get Directions">${g.venue || ''}</a>`;
 
             let lineupHtml = '';
             if (g.lineup && g.lineup.trim() !== '') {
                 lineupHtml = `<span class="lineup-badge">${g.lineup}</span>`;
             }
 
+            let locationHtml = g.location || '';
+            if (g.address) {
+                let mapQuery = `${g.venue}, ${g.address}, ${g.location}`;
+                const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`;
+                locationHtml += ` <a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="directions-link" title="Open Map">(Directions)</a>`;
+            }
+
             return `
                 <tr>
                     <td class="date">${g.date || ''}</td>
                     <td class="venue">${venueHtml}${lineupHtml}</td>
-                    <td class="location">${g.location || ''}</td>
+                    <td class="location">${locationHtml}</td>
                 </tr>
             `;
         }
