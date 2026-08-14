@@ -682,12 +682,19 @@
             return new Date(now.getFullYear(), now.getMonth(), now.getDate());
         }
 
-        // Helper: Generate row HTML for gig entry
+        // Helper: Generate row HTML for gig entry with Google Maps search link
         function buildGigRow(g) {
-            let venueHtml = g.venue || '';
-            if (g.url && g.url.trim().toLowerCase().startsWith('http')) {
-                venueHtml = `<a href="${g.url}" target="_blank" rel="noopener noreferrer" class="gig-link">${g.venue}</a>`;
+            let mapQuery = g.venue || '';
+            if (g.address) {
+                mapQuery += `, ${g.address}`;
             }
+            if (g.location) {
+                mapQuery += `, ${g.location}`;
+            }
+
+            const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`;
+            
+            let venueHtml = `<a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="gig-link" title="Get Directions">${g.venue || ''}</a>`;
 
             let lineupHtml = '';
             if (g.lineup && g.lineup.trim() !== '') {
@@ -752,6 +759,17 @@
                 const startTimeStr = gig.startTime ? `${gig.startTime}:00` : "19:00:00";
                 const startISO = `${isoBase}T${startTimeStr}-07:00`;
 
+                const postalAddress = {
+                    "@type": "PostalAddress",
+                    "addressLocality": gig.location ? gig.location.split(',')[0].trim() : '',
+                    "addressRegion": "WA",
+                    "addressCountry": "US"
+                };
+
+                if (gig.address) {
+                    postalAddress.streetAddress = gig.address;
+                }
+
                 const eventSchemaObj = {
                     "@context": "https://schema.org",
                     "@type": "MusicEvent",
@@ -762,12 +780,7 @@
                     "location": {
                         "@type": "Place",
                         "name": gig.venue,
-                        "address": {
-                            "@type": "PostalAddress",
-                            "addressLocality": gig.location.split(',')[0].trim(),
-                            "addressRegion": "WA",
-                            "addressCountry": "US"
-                        }
+                        "address": postalAddress
                     },
                     "performer": {
                         "@type": "MusicGroup",
